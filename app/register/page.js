@@ -6,6 +6,7 @@ export default function Register() {
     name: '',
     email: '',
     password: '',
+    cellphone: '',
   });
 
   const handleChange = (e) => {
@@ -29,16 +30,16 @@ export default function Register() {
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Registration failed:', errorText);
-        // Tambahkan logika untuk menampilkan pesan error
+        // Add logic to display error message
         return;
       }
   
       const result = await response.json();
       console.log('User registered successfully:', result);
-      // Tambahkan logika untuk mengarahkan pengguna atau menampilkan pesan sukses
+      // Add logic to redirect user or display success message
     } catch (error) {
       console.error('An error occurred:', error);
-      // Tambahkan logika untuk menampilkan pesan error
+      // Add logic to display error message
     }
   };
 
@@ -53,7 +54,7 @@ export default function Register() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border rounded text-[#000000]"
             placeholder="Enter your name"
             required
           />
@@ -65,7 +66,7 @@ export default function Register() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border rounded text-[#000000]"
             placeholder="Enter your email"
             required
           />
@@ -77,8 +78,20 @@ export default function Register() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="w-full px-3 py-2 border rounded text-[#000000]"
             placeholder="Enter your password"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-medium text-[#1F1F1F]">Cellphone</label>
+          <input
+            type="text"
+            name="cellphone"
+            value={formData.cellphone}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded text-[#000000]"
+            placeholder="Enter your cellphone number"
             required
           />
         </div>

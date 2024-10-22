@@ -44,7 +44,7 @@ export default function Login() {
               Email
             </label>
             <input
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg text-[#000000] focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="email"
               id="email"
               name="email"
@@ -58,7 +58,7 @@ export default function Login() {
               Password
             </label>
             <input
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg text-[#000000] focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="password"
               id="password"
               name="password"

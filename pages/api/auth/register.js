@@ -1,40 +1,41 @@
-import { hash } from 'bcryptjs';
+// pages/api/auth/register.js
+
 import { PrismaClient } from '@prisma/client';
+import { hash } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { email, password } = req.body;
+    const { name, email, password, cellphone } = req.body;
 
-    // Validasi input
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required.' });
+    // Validate input
+    if (!name || !email || !password || !cellphone) {
+      return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Cek apakah email sudah terdaftar
+    // Check if email is already registered
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email is already registered.' });
+      return res.status(400).json({ message: 'Email is already registered' });
     }
 
     // Hash password
     const hashedPassword = await hash(password, 10);
 
-    try {
-      // Simpan pengguna di database
-      const newUser = await prisma.user.create({
-        data: {
-          email,
-          password: hashedPassword,
-        },
-      });
-      res.status(201).json({ message: 'User registered successfully', user: newUser });
-    } catch (error) {
-      res.status(500).json({ message: 'User registration failed', error });
-    }
+    // Create user
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        cellphone,
+      },
+    });
+
+    res.status(201).json(user);
   } else {
     res.status(405).json({ message: 'Method not allowed' });
   }
