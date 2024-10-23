@@ -6,12 +6,12 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { userId, tenantName, amount, transactionId } = req.body;
 
-    // Validate input
+    {/* ============================= Validate input ============================= */}
     if (!userId || !tenantName || !amount || !transactionId) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Check if transaction ID is unique
+    {/* ============================= Check transaction ID ============================= */}
     const existingTransaction = await prisma.transaction.findUnique({
       where: { transactionId },
     });
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Transaction ID is already used' });
     }
 
-    // Create transaction
+    {/* ============================= Transaction Redeem ============================= */}
     const transaction = await prisma.transaction.create({
       data: {
         userId: parseInt(userId),
@@ -29,14 +29,14 @@ export default async function handler(req, res) {
       },
     });
 
-    // Create voucher if amount is 1,000,000 rupiahs or more
+    {/* ============================= Voucher amount ============================= */}
     if (amount >= 1000000) {
       const voucher = await prisma.voucher.create({
         data: {
           code: `VOUCHER-${Date.now()}`,
           amount: 10000,
           userId: parseInt(userId),
-          expiresAt: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000), // 3 months from now
+          expiresAt: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000), 
         },
       });
       res.status(201).json({ transaction, voucher });

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -30,7 +31,19 @@ export default function Login() {
       router.push('/dashboard');
     } else {
       console.error('Login failed:', result.error);
-      // Add logic to display error message
+      let errorMessage = 'An error occurred during login. Please try again.';
+      if (result.error === 'Email not registered') {
+        errorMessage = 'Email not registered';
+      } else if (result.error === 'Wrong password') {
+        errorMessage = 'Wrong password';
+      } else {
+        errorMessage = result.error;
+      }
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: errorMessage,
+      });
     }
   };
 

@@ -1,5 +1,3 @@
-// pages/api/redeem.js
-
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -8,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { userId, voucherCode } = req.body;
 
-    // Validate input
+    {/* ============================= Validate input ============================= */}
     if (!userId || !voucherCode) {
       return res.status(400).json({ message: 'User ID and voucher code are required' });
     }

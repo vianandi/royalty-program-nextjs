@@ -21,19 +21,19 @@ export default NextAuth({
 
           if (!user) {
             console.error('No user found with the email:', credentials.email);
-            return null;
+            throw new Error('Email not registered');
           }
 
           const isValidPassword = await compare(credentials.password, user.password);
           if (!isValidPassword) {
             console.error('Invalid password for user:', credentials.email);
-            return null;
+            throw new Error('Wrong password');
           }
 
           return { id: user.id, email: user.email };
         } catch (error) {
           console.error('Error in authorize function:', error);
-          throw new Error('Internal server error');
+          throw new Error(error.message || 'Internal server error');
         }
       },
     }),

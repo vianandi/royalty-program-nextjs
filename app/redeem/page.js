@@ -28,10 +28,8 @@ export default function Redeem() {
     const result = await response.json();
     if (response.ok) {
       console.log('Voucher redeemed successfully:', result);
-      // Add logic to display success message
     } else {
-      console.error('Voucher redemption failed:', result.message);
-      // Add logic to display error message
+      console.error('Voucher redemption failed:', result.message);      
     }
   };
 

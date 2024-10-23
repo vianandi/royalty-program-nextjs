@@ -1,4 +1,4 @@
-'use client';  // needed for client-side components
+'use client'; 
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
@@ -18,7 +18,7 @@ export default function Dashboard() {
             throw new Error(`Failed to fetch vouchers: ${response.statusText}`);
           }
           const data = await response.json();
-          console.log('Fetched vouchers:', data); // Debugging log
+          console.log('Fetched vouchers:', data); 
           setVouchers(data);
         } catch (error) {
           console.error('Error fetching vouchers:', error);

@@ -1,5 +1,3 @@
-// pages/api/auth/register.js
-
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
 
@@ -9,12 +7,12 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, email, password, cellphone } = req.body;
 
-    // Validate input
+    {/* ============================= Validate input ============================= */}
     if (!name || !email || !password || !cellphone) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Check if email is already registered
+    {/* ============================= Check email ============================= */}
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -22,10 +20,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Email is already registered' });
     }
 
-    // Hash password
+    {/* ============================= Hash password ============================= */}
     const hashedPassword = await hash(password, 10);
 
-    // Create user
+    {/* ============================= Create user ============================= */}
     const user = await prisma.user.create({
       data: {
         name,

@@ -18,6 +18,7 @@ const geistMono = localFont({
 });
 
 export default function Layout({ children }) {
+  {/* ============================= Snow Theme ============================= */}
   useEffect(() => {
     const canvas = document.getElementById("town");
     const ctx = canvas.getContext("2d");
@@ -77,8 +78,6 @@ export default function Layout({ children }) {
     }
 
     draw();
-
-    // Cleanup function to remove the canvas when the component unmounts
     return () => {
       ctx.clearRect(0, 0, W, H);
     };
@@ -92,7 +91,7 @@ export default function Layout({ children }) {
       </head>
       <body className="flex flex-col min-h-screen relative">
         <canvas id="town" className="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
-        {/* Navigation */}
+        {/* ============================= Navigation ============================= */}
         <header className="bg-[#3498DB] text-[#2C3E50] p-4 relative z-10">
           <div className="container mx-auto flex justify-between items-center">
             <h1 className="text-2xl font-bold">Mall Royalty Program</h1>
@@ -106,12 +105,12 @@ export default function Layout({ children }) {
           </div>
         </header>
 
-        {/* Main Content */}
+        {/* ============================= Main Content ============================= */}
         <main className="flex-grow container mx-auto p-4 relative z-10">
           <ClientLayout>{children}</ClientLayout>
         </main>
 
-        {/* Footer */}
+        {/* ============================= Footer =============================*/}
         <footer className="bg-[#3498DB] text-[#2C3E50] text-center p-4 relative z-10">
           <p>&copy; 2024 Mall Royalty Program. All rights reserved.</p>
         </footer>
