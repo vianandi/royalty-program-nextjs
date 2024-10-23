@@ -96,8 +96,8 @@ export default function Transactions() {
   }
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
-      <h1 className="text-3xl font-bold mb-4 text-center text-[#000000]">Submit Transaction</h1>
+    <div className="p-6 max-w-md mx-auto backdrop-filter backdrop-blur-lg rounded-[30px] bg-white bg-opacity-35 shadow-md space-y-4">
+      <h1 className="text-3xl font-bold mb-4 text-center text-[#000000]">Redeem Code</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
@@ -128,7 +128,7 @@ export default function Transactions() {
           />
         </div>
         <button
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out w-full"
+          className="bg-[#1ABC9C] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#3498DB] transition duration-300 ease-in-out w-full"
           type="submit"
         >
           Submit

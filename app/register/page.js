@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 import { useState } from 'react';
 
 export default function Register() {
@@ -26,82 +26,94 @@ export default function Register() {
         },
         body: JSON.stringify(formData),
       });
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Registration failed:', errorText);
-        // Add logic to display error message
         return;
       }
-  
+
       const result = await response.json();
       console.log('User registered successfully:', result);
-      // Add logic to redirect user or display success message
     } catch (error) {
       console.error('An error occurred:', error);
-      // Add logic to display error message
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center text-[#1F1F1F]">Register</h2>
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-[#1F1F1F]">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded text-[#000000]"
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-[#1F1F1F]">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded text-[#000000]"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-[#1F1F1F]">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded text-[#000000]"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-[#1F1F1F]">Cellphone</label>
-          <input
-            type="text"
-            name="cellphone"
-            value={formData.cellphone}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded text-[#000000]"
-            placeholder="Enter your cellphone number"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
-        >
-          Register
-        </button>
-      </form>
+    <div className="flex items-center justify-center min-h-[90vh]">
+      <div className="backdrop-filter backdrop-blur-lg rounded-[15px] p-8 bg-white bg-opacity-30 shadow-lg max-w-md w-full">
+        <h2 className="text-3xl font-bold mb-6 text-center text-[#2C3E50]">Register</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+              Name
+            </label>
+            <input
+              className="w-full p-3 border rounded-lg text-[#2C3E50] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="w-full p-3 border rounded-lg text-[#2C3E50] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="w-full p-3 border rounded-lg text-[#2C3E50] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cellphone">
+              Cellphone
+            </label>
+            <input
+              className="w-full p-3 border rounded-lg text-[#2C3E50] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="text"
+              id="cellphone"
+              name="cellphone"
+              placeholder="Enter your cellphone number"
+              value={formData.cellphone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-[#1ABC9C] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#3498DB] transition duration-300 ease-in-out w-full"
+              type="submit"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+        <p className="text-center text-white mt-6">
+          Already have an account? <a href="/login" className="text-[#65ebfd] hover:underline">Login</a>
+        </p>
+      </div>
     </div>
   );
 }
