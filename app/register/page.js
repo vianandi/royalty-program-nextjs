@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -8,6 +10,8 @@ export default function Register() {
     password: '',
     cellphone: '',
   });
+
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({
@@ -35,6 +39,16 @@ export default function Register() {
 
       const result = await response.json();
       console.log('User registered successfully:', result);
+
+      // Show success notification and redirect to login page
+      Swal.fire({
+        title: 'Success!',
+        text: 'User registered successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        router.push('/login');
+      });
     } catch (error) {
       console.error('An error occurred:', error);
     }
@@ -73,20 +87,6 @@ export default function Register() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="w-full p-3 border rounded-lg text-[#2C3E50] focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </div>
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cellphone">
               Cellphone
@@ -98,6 +98,20 @@ export default function Register() {
               name="cellphone"
               placeholder="Enter your cellphone number"
               value={formData.cellphone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="w-full p-3 border rounded-lg text-[#2C3E50] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
               onChange={handleChange}
             />
           </div>
